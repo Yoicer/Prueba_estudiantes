@@ -51,6 +51,9 @@
 			<li class="nav-item">
 			<a class="nav-link" id="form-tab" data-toggle="tab" href="#graficas" role="tab" aria-controls="graficas" aria-selected="true">Graficas</a>				   	
 			</li>
+			<li class="nav-item">
+			<a class="nav-link" id="form-tab" data-toggle="tab" href="#medidas" role="tab" aria-controls="medidas" aria-selected="true">Medidas de tendencia</a>				   	
+			</li>
 		</ul>
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
@@ -170,6 +173,34 @@
 						</div>
 						<div class="col-lg-6">
 							<canvas id="myChart3" width="400" height="400"></canvas>
+						</div>
+
+					</div>
+                </div>
+                
+			</div>			
+			<div class="tab-pane fade" id="medidas" role="tabpanel" aria-labelledby="form-tab">
+				<div class="card">
+					<div class="card-header">
+						<h4>Medidas de tendencia</h4>
+					</div>
+					<div class="card-body">
+						<div class="col-lg-6">
+							<h5>Moda para la variable municipio.</h5>
+							<?php echo "<h6>Municipio: ".$modaMunicipio[0]['municipio']."</h6>"; ?>
+							<h6>Moda: <?php echo $modaMunicipio[0]['cont']; ?></h6>
+						</div>
+						<div class="col-lg-6">
+							<h5>Media de Promedio, Estrato, Semestre</h5>
+							<h6>Promedio: <?php echo $media[0]['promedio']; ?></h6>
+							<h6>Estrato: <?php echo $media[0]['estrato']; ?></h6>
+							<h6>Semestre: <?php echo $media[0]['semestre']; ?></h6>
+						</div>
+						<div class="col-lg-6">
+						<h5>Desviaacion Estandar de Promedio, Estrato, Semestre</h5>
+						<h6>Promedio: <?php echo $desviacion[0]['promedio']; ?></h6>
+						<h6>Estrato: <?php echo $desviacion[0]['estrato']; ?></h6>
+						<h6>Semestre: <?php echo $desviacion[0]['semestre']; ?></h6>
 						</div>
 
 					</div>

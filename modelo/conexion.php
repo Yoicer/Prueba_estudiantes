@@ -51,6 +51,54 @@
             }
             return $retorno;
         }
+        public function getModaMunicipio(){
+            $query = $this->con->query(" SELECT  municipio,COUNT(municipio) as cont
+                                        FROM estudiante
+                                        GROUP BY municipio
+                                        ORDER BY cont DESC
+                                        limit 1 "
+                                    );
+
+            $i = 0;
+            $retorno = [];
+
+            while($fila = $query->fetch_assoc()){
+                $retorno[$i] = $fila;
+                $i++;
+            }
+            return $retorno;
+        }
+        public function getMedia(){
+            $query = $this->con->query(" SELECT (sum(promedio)/count(promedio)) AS promedio,
+                                        (sum(semestre)/count(semestre)) AS semestre,
+                                        (sum(estrato)/count(estrato)) AS estrato
+                                FROM estudiante"
+                                    );
+
+            $i = 0;
+            $retorno = [];
+
+            while($fila = $query->fetch_assoc()){
+                $retorno[$i] = $fila;
+                $i++;
+            }
+            return $retorno;
+        }public function getDesviacion(){
+            $query = $this->con->query(" SELECT SQRT(AVG(promedio*promedio) - AVG(promedio)*AVG(promedio)) AS promedio,
+                                        SQRT(AVG(semestre*semestre) - AVG(semestre)*AVG(semestre)) AS semestre,
+                                        SQRT(AVG(estrato*estrato) - AVG(estrato)*AVG(estrato)) AS estrato
+                                    FROM estudiante; "
+                                    );
+
+            $i = 0;
+            $retorno = [];
+
+            while($fila = $query->fetch_assoc()){
+                $retorno[$i] = $fila;
+                $i++;
+            }
+            return $retorno;
+        }
 
         public function getEstudiante($codigo){
             $query = $this->con->query("SELECT * FROM estudiante WHERE codigo = $codigo ");

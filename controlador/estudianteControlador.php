@@ -9,6 +9,9 @@
  $estudiantesSemestre = $con->getEstudiantesSemestre();
 
  $estudianteMunicipio = $con->getEstudiantesMunicipio();
+ $modaMunicipio = $con->getModaMunicipio();
+ $media = $con->getMedia();
+ $desviacion = $con->getDesviacion();
 
  require_once "./vista/estudiantes.php";
 
