@@ -6,6 +6,10 @@
 
  $estudiantes = $con->getEstudiantes();
 
+ $estudiantesSemestre = $con->getEstudiantesSemestre();
+
+ $estudianteMunicipio = $con->getEstudiantesMunicipio();
+
  require_once "./vista/estudiantes.php";
 
  if (isset($_GET['id'])) {
@@ -38,7 +42,7 @@
     $datos['municipio'] = $_POST['municipioEdit'];
     $datos['semestre'] = $_POST['semestreEdit'];
 
-    $con->actualizarEstudiante($datos['codigo']);
+    $con->actualizarEstudiante($datos);
     echo '<script language="javascript">alert("Se han actualizado los datos");</script>';
     
     }

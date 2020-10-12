@@ -4,8 +4,8 @@
 	<title>Inicio</title>
 	
 	<!--JQUERY-->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
 	
 	<!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
 	<link rel="stylesheet"
@@ -162,7 +162,16 @@
 						<h4>Graficas</h4>
 					</div>
 					<div class="card-body">
-					
+						<div class="col-lg-6">
+							<canvas id="myChart" width="400" height="400"></canvas>
+						</div>
+						<div class="col-lg-6">
+							<canvas id="myChart2" width="400" height="400"></canvas>
+						</div>
+						<div class="col-lg-6">
+							<canvas id="myChart3" width="400" height="400"></canvas>
+						</div>
+
 					</div>
                 </div>
                 
@@ -225,3 +234,117 @@
 </div>
 </body>
 </html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+
+<script>
+	var ctx = document.getElementById('myChart');
+	var myChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: [
+				<?php  
+					foreach($estudiantesSemestre as $estd){
+						echo "'".$estd['semestre']."',";
+					}
+				?>
+			],
+			datasets: [{
+				label: '# Estudiantes x Semestre',
+				data: [
+					<?php  
+						foreach($estudiantesSemestre as $estd){
+							echo "'".$estd['estudiantes']."',";
+						}
+					?>
+				],
+				backgroundColor: [
+					<?php  
+						foreach($estudiantesSemestre as $estd){
+							echo "'rgba(255, 99, 132, 0.2)',";
+						}
+					?>
+				],
+				borderColor: [
+					<?php  
+						foreach($estudiantesSemestre as $estd){
+							echo "'rgba(255, 99, 132, 1)',";
+						}
+					?>
+				],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		}
+	});
+</script>
+<script>
+	var ctx = document.getElementById('myChart2');
+	var scatterChart = new Chart(ctx, {
+    type: 'scatter',
+		data: {
+			datasets: [{
+				label: 'Promedio x Estrato',
+				data: [
+					<?php  
+						foreach($estudiantes as $est){
+							echo "{
+								x:".$est['estrato'].",
+								y:".$est['promedio']."
+								},";
+						}
+					?>
+				]
+			}]
+		},
+		options: {
+			scales: {
+				xAxes: [{
+					type: 'linear',
+					position: 'bottom'
+				}]
+			}
+		}
+	});
+</script>
+<script>
+	new Chart(document.getElementById("myChart3"), {
+		type: 'pie',
+		data: {
+		labels: [
+			<?php  
+					foreach( $estudianteMunicipio as $estM){
+						echo "'".$estM['municipio']."',";
+					}
+			?>
+		],
+		datasets: [{
+			label: "Population (millions)",
+			backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#f42370","#e28873"],
+			data: [
+				<?php  
+					foreach( $estudianteMunicipio as $estM){
+						echo "'".$estM['estudiantes']."',";
+					}
+			?>
+			]
+		}]
+		},
+		options: {
+		title: {
+			display: true,
+			text: 'Estudiantes x Municipio'
+		}
+		}
+	});
+	
+</script>

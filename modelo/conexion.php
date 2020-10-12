@@ -22,6 +22,35 @@
             }
             return $retorno;
         }
+        public function getEstudiantesSemestre(){
+            $query = $this->con->query("SELECT count(idestudiante) as estudiantes, semestre
+                                        FROM `estudiante`
+                                        GROUP BY semestre");
+
+            $i = 0;
+            $retorno = [];
+
+            while($fila = $query->fetch_assoc()){
+                $retorno[$i] = $fila;
+                $i++;
+            }
+            return $retorno;
+        } 
+        public function getEstudiantesMunicipio(){
+            $query = $this->con->query("SELECT count(idestudiante) as estudiantes, municipio
+                                        FROM `estudiante`
+                                        GROUP BY municipio"
+                                    );
+
+            $i = 0;
+            $retorno = [];
+
+            while($fila = $query->fetch_assoc()){
+                $retorno[$i] = $fila;
+                $i++;
+            }
+            return $retorno;
+        }
 
         public function getEstudiante($codigo){
             $query = $this->con->query("SELECT * FROM estudiante WHERE codigo = $codigo ");
